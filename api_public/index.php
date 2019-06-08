@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -27,7 +28,7 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Autho
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../api/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__.'/../api/bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------

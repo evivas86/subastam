@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/clear_cache', function () {
+
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+
+    return '<h1>Caches Borradas</h1>';
+});
+
+Route::get('/migrate', function () {
+
+    Artisan::call('migrate');
+
+    return '<h1>Migracion Exitosa</h1>';
+});
