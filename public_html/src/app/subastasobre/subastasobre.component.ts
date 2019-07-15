@@ -23,7 +23,7 @@ export class SubastasobreComponent implements OnInit {
       alert('Guardado con exito');
     }, (error) =>{
       console.log(error);
-      alert('Ocurrion un error');
+      alert('Ocurrio un error');
     });
   }
 }

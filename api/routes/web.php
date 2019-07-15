@@ -25,9 +25,14 @@ Route::get('/clear_cache', function () {
     return '<h1>Caches Borradas</h1>';
 });
 
-Route::get('/migrate', function () {
+Route::get('/dbinstall', function () {
 
-    Artisan::call('migrate');
+    Artisan::call('migrate:fresh');
+    Artisan::call('passport:install');
 
-    return '<h1>Migracion Exitosa</h1>';
+    return '<h1>Instalacion de Base de Datos Exitosa</h1>';
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

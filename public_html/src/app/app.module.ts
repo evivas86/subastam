@@ -8,7 +8,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -54,6 +54,7 @@ import { SubastasobreComponent } from './subastasobre/subastasobre.component';
 import { SubastamazoComponent } from './subastamazo/subastamazo.component';
 import {Route, RouterModule} from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 const routes: Route[] = [
   {path: 'home', component: HomeComponent},
@@ -66,9 +67,11 @@ const routes: Route[] = [
     AppComponent,
     SubastasobreComponent,
     SubastamazoComponent,
-    HomeComponent
+    HomeComponent,
+    LoginDialogComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule, 
@@ -124,6 +127,7 @@ const routes: Route[] = [
     HttpClientModule,
     FormsModule,
   ],exports: [
+    ReactiveFormsModule,
     A11yModule,
     CdkStepperModule,
     CdkTableModule,
@@ -167,7 +171,7 @@ const routes: Route[] = [
     PortalModule,
     ScrollingModule,
   ],
-  entryComponents: [AppComponent],
+  entryComponents: [AppComponent,LoginDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
