@@ -7,9 +7,15 @@
     <button mat-button class="NavMatButton" routerLink="/subastasobre">Subasta Sobre Cerrado</button>
     <button mat-button class="NavMatButton" routerLink="/subastamazo">Subasta de Mazo</button>
     <span class="spacer"></span>
-    <button mat-icon-button (click)="openDialog()">
+    <button mat-icon-button routerLink="/login" *ngIf="!checkUserLogin()">
         <mat-icon>person</mat-icon>
     </button>
+    <button mat-button [matMenuTriggerFor]="menu" *ngIf="checkUserLogin()">
+      <mat-icon>person</mat-icon>
+    </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logOut()">Cerrar Sesión</button>
+      </mat-menu>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container"

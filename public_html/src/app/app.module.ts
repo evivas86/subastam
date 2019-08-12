@@ -54,12 +54,17 @@ import { SubastasobreComponent } from './subastasobre/subastasobre.component';
 import { SubastamazoComponent } from './subastamazo/subastamazo.component';
 import {Route, RouterModule} from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './app-routing.module';
+import { DialogComponent } from './dialog/dialog.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Route[] = [
   {path: 'home', component: HomeComponent},
   {path: 'subastasobre', component: SubastasobreComponent},
   {path: 'subastamazo', component: SubastamazoComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({
@@ -68,7 +73,9 @@ const routes: Route[] = [
     SubastasobreComponent,
     SubastamazoComponent,
     HomeComponent,
-    LoginDialogComponent
+    LoginComponent,
+    DialogComponent,
+    RegisterComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -126,6 +133,7 @@ const routes: Route[] = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
+    AppRoutingModule,
   ],exports: [
     ReactiveFormsModule,
     A11yModule,
@@ -171,7 +179,7 @@ const routes: Route[] = [
     PortalModule,
     ScrollingModule,
   ],
-  entryComponents: [AppComponent,LoginDialogComponent],
+  entryComponents: [AppComponent,LoginComponent,DialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

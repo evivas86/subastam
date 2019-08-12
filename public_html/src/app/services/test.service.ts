@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { test } from '../interfaces/test';
+import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
 
 const api_uri= environment.API_ENDPOINT;
@@ -13,6 +14,11 @@ export class TestService {
   constructor(private httpClient: HttpClient) { }
   
   getTest(){
+    return this.httpClient.get<any>(api_uri + '/test').pipe(
+      map(data=>{
+        return data;
+      })
+    )
   }
   
   saveTest(test:test){

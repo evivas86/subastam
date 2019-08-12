@@ -1,0 +1,47 @@
+<form [formGroup]="registerGroup" (ngSubmit)="sendRegister()">
+  <div class="example-container">
+  <mat-card class="center">
+    <mat-card-header>
+      <mat-card-title>Registro de Usuario</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <!--img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+    <mat-card-content>
+      <div>
+        <mat-form-field>
+          <input matInput formControlName="name" placeholder="Nombre">
+          <mat-error *ngIf="registerGroup.controls.name.hasError('required')">El Nombre es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="Email">
+        <mat-error *ngIf="registerGroup.controls.email.hasError('required')">El email es obligatorio</mat-error>
+        <mat-error *ngIf="registerGroup.controls.email.hasError('email')">El email no es valido</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="password" placeholder="Contraseña" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+        <mat-error *ngIf="registerGroup.controls.password.hasError('required')">La contraseña es obligatoria</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="c_password" [errorStateMatcher]="matcher" placeholder="Repetir Contraseña" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+        <mat-error *ngIf="registerGroup.controls.c_password.hasError('required')">Repetir contraseña es obligatoria</mat-error>
+        <mat-error *ngIf="registerGroup.hasError('notSame')">Las contarseñas no son iguales</mat-error> 
+      </mat-form-field>
+    </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button cdkFocusInitial>Registrase</button>
+      <div *ngIf="message">{{message}}</div>
+    </mat-card-actions>
+  </mat-card>
+  </div>
+  </form>

@@ -7,10 +7,15 @@ use App\User;
 use Illuminate\Support\Facades\Auth; 
 use DB;
 use Validator;
+use Carbon\Carbon;
 
 class ApiAuthController extends Controller
 {
     public $successStatus = 200;
+
+    public function getServerDate(Request $request) {    
+      return Carbon::now();
+   }
   
     public function register(Request $request) {    
     $validator = Validator::make($request->all(), [ 
@@ -29,14 +34,52 @@ class ApiAuthController extends Controller
    }
      
       
-   public function login(){ 
-   if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
+   public function login(Request $request){ 
+
+      $request->validate([
+         'email' => 'required|string|email',
+         'password' => 'required|string',
+         'remember_me' => 'boolean',
+      ]);
+
+      $credentials = request(['email','password']);
+      if(!Auth::attempt($credentials)){ 
+         return response()->json(['error'=>'Unauthorized'], 401);
+      }
+
+      $user = $request->user();
+      $tokenResult = $user->createToken('Personal Access Token');
+      $token = $tokenResult->token;
+
+      if($request->remember_me){
+         $token->expires_at = Carbon::now()->addWeeks(1);
+      }else{
+         $token->expires_at = Carbon::now()->addMinutes(5);
+      }
+
+      $token->save();
+
+      $expires_at = Carbon::parse($tokenResult->token->expires_at);
+
+      return response()->json([
+         'access_token' => $tokenResult->accessToken,
+         'token_type' => 'Bearer',
+         'expires_at' => $expires_at->toDateTimeString(),
+         'time_zone' => $expires_at->tzName,
+      ]);
+
+
+
+
+
+
+   /*if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
       $user = Auth::user(); 
       $success['token'] =  $user->createToken('AppName')-> accessToken; 
        return response()->json(['success' => $success], $this->successStatus); 
      } else{ 
       return response()->json(['error'=>'Unauthorized'], 401); 
-      } 
+      } */
    }
      
    public function getUser() {
