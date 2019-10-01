@@ -9,6 +9,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { CountdownTimerModule } from 'ngx-countdown-timer';
 
 
 import { AppComponent } from './app.component';
@@ -50,7 +51,7 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import { SubastasobreComponent } from './subastasobre/subastasobre.component';
+import { packetAuctionComponent } from './packetauction/packetauction.component';
 import { SubastamazoComponent } from './subastamazo/subastamazo.component';
 import {Route, RouterModule} from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -58,10 +59,13 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DialogComponent } from './dialog/dialog.component';
 import { RegisterComponent } from './register/register.component';
+import { PacketdetailComponent } from './packetauction/packetdetail/packetdetail.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 const routes: Route[] = [
   {path: 'home', component: HomeComponent},
-  {path: 'subastasobre', component: SubastasobreComponent},
+  {path: 'packetauction', component: packetAuctionComponent},
+  {path: 'packetdetail/:id', component: PacketdetailComponent},
   {path: 'subastamazo', component: SubastamazoComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
@@ -70,12 +74,13 @@ const routes: Route[] = [
 @NgModule({
   declarations: [
     AppComponent,
-    SubastasobreComponent,
+    packetAuctionComponent,
     SubastamazoComponent,
     HomeComponent,
     LoginComponent,
     DialogComponent,
-    RegisterComponent
+    RegisterComponent,
+    PacketdetailComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -134,6 +139,8 @@ const routes: Route[] = [
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    CountdownTimerModule,
+    NgxPayPalModule,
   ],exports: [
     ReactiveFormsModule,
     A11yModule,
@@ -178,8 +185,10 @@ const routes: Route[] = [
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    CountdownTimerModule,
+    NgxPayPalModule,
   ],
-  entryComponents: [AppComponent,LoginComponent,DialogComponent],
+  entryComponents: [AppComponent,LoginComponent,DialogComponent,PacketdetailComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

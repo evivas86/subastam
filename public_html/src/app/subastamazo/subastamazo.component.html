@@ -24,6 +24,16 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+
+            
+  <mat-grid-list cols="3" rowHeight="1:1">
+    <mat-grid-tile>Copyright <br> 2019 Google Inc. All Rights Reserved.
+      Use of this source <br>code is governed <br>by an MIT-style <br>license that
+      can be found in the LICENSE file at http://angular.io/license</mat-grid-tile>
+    <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>4</mat-grid-tile>
+  </mat-grid-list>
       </mat-card-content>
       <mat-card-actions>
       </mat-card-actions>

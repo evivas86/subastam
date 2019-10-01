@@ -9,3 +9,7 @@
   }
 
 .center{left:25%;width:50%;position:absolute;text-align:center;}
+
+mat-grid-tile {
+  background: lightblue;
+}

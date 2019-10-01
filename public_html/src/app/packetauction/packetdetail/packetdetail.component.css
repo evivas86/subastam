@@ -1,0 +1,39 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+.center{left:25%;width:50%;position:absolute;text-align:center;}
+.packetcardgroup{display: unset !important; border: 0 !important;}
+.packetcard{float: left;padding:20px;border: 0 !important;transition: transform .2s;}
+.packetcard:hover { 
+    transform: scale(1.5);
+    z-index: 999;
+  }
+  .mat-button-toggle-disabled.mat-button-toggle-appearance-standard {
+    transform: scale(1) !important;
+    z-index: 500 !important;
+  }
+/*Disable stepper header navigation*/
+::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}
+/*.packeticon{font-size: 50px;}*/
+.avatar{
+    background-image: "assets/img/amazon.jpg";
+}
+
+.payMethodRadioGroup{
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.payMethodRadioButton {
+  margin: 5px;
+}

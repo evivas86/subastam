@@ -23,6 +23,8 @@ export interface DialogData {
 
 export class AppComponent implements OnInit {
   title = 'subastamericana';
+  public loading: boolean;
+
   mobileQuery: MediaQueryList;
 
   message;
@@ -60,6 +62,7 @@ export class AppComponent implements OnInit {
     public dialog: MatDialog,
     private messageService: MessageService
     ) {
+      this.loading = false;
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);

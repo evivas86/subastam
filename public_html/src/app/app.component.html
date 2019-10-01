@@ -1,10 +1,17 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+    <div class = "loading" *ngIf="loading">
+        <mat-progress-spinner
+        class="example-margin"
+        color="accent"
+        mode="indeterminate">
+    </mat-progress-spinner>
+    </div>
   <mat-toolbar color="primary" class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()" class="example-menu"><mat-icon>menu</mat-icon></button>
     <button mat-icon-button routerLink="/home">
         <mat-icon>3d_rotation</mat-icon>
     </button>
-    <button mat-button class="NavMatButton" routerLink="/subastasobre">Subasta Sobre Cerrado</button>
+    <button mat-button class="NavMatButton" routerLink="/packetauction">Subasta Sobre Cerrado</button>
     <button mat-button class="NavMatButton" routerLink="/subastamazo">Subasta de Mazo</button>
     <span class="spacer"></span>
     <button mat-icon-button routerLink="/login" *ngIf="!checkUserLogin()">
@@ -24,7 +31,7 @@
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
         <!--<a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>-->
-        <a mat-list-item routerLink="/subastasobre">Subasta Sobre Cerrado</a>
+        <a mat-list-item routerLink="/packetauction">Subasta Sobre Cerrado</a>
         <a mat-list-item routerLink="/subastamazo">Subasta de Mazo</a>
       </mat-nav-list>
     </mat-sidenav>

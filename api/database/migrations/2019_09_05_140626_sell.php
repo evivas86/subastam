@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PacketAuction extends Migration
+class Sell extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,19 @@ class PacketAuction extends Migration
      */
     public function up()
     {
-        Schema::create('packet_auctions', function (Blueprint $table) {
+        //
+        Schema::create('sells', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->integer('quantity');
-            $table->integer('min');
-            $table->integer('max');
-            $table->integer('packet_cost');
+            $table->string('module');
+            $table->string('quantity');
+            $table->integer('total_cost');
             $table->integer('currency_id');
-            $table->integer('prize_id');
             $table->integer('user_id');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->integer('auction_id');
+            $table->boolean('status');
+            $table->string('pay_method');
+            $table->string('sell_billing_code');
+            $table->string('pay_billing_code');
             $table->timestamps();
         });
     }
@@ -36,6 +37,7 @@ class PacketAuction extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packet_auctions');
+        //
+        Schema::dropIfExists('sells');
     }
 }

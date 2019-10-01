@@ -1,0 +1,18 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+.center{left:25%;width:50%;position:absolute;text-align:center;}
+.packetcard{width:50%;text-align:center;max-width: 200px; float: left;margin:20px;transition: transform .2s;}
+.packetcard:hover { 
+  background-color: #3f51b5;
+  color:#fff;
+  cursor: pointer;
+  transform: scale(1.5);
+}

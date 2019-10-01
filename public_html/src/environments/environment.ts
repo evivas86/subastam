@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_ENDPOINT:'http://api.subastamericana.com:8083/api/v1'
+  API_ENDPOINT:'http://api.subastamericana.com/api/v1'
 };
 
 /*

@@ -18,7 +18,6 @@ export class DialogComponent {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { 
-    console.log(data);
     this.style = data.style || 0;
     this.title = data.title;
     this.message = data.message;

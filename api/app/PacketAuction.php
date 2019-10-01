@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PacketAuction extends Model
 {
     //
-    public function Packet(){
+    public function packets(){
         return $this->hasMany('App\Packet');
     }
 }

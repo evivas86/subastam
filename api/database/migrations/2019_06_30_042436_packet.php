@@ -18,6 +18,8 @@ class Packet extends Migration
             $table->integer('auction_id');
             $table->bigInteger('code');
             $table->integer('user_id');
+            $table->boolean('is_already_buyed');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

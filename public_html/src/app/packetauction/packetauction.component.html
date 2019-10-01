@@ -1,0 +1,26 @@
+<div class="example-container">
+    <mat-card class="center">
+      <mat-card-header>
+          <h1 class="example-app-name">Subasta de Sobre Cerrado</h1>
+      </mat-card-header>
+      <mat-card-content>
+          <div *ngFor="let auction of PacketAuctions">
+            <mat-card class="packetcard" matRipple [matRippleColor]="gray" (click)="showDetail(auction.id)">
+                    <mat-card-header>
+                        <h1>{{auction.title}}</h1>
+                        <mat-card-subtitle>{{auction.amount}} {{auction.simbol}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image [src]="auction.type_img" alt="">
+                    <mat-card-content>
+                        <countdown-timer style="font-size:30px;" [end]="auction.end_date"></countdown-timer>
+                    </mat-card-content>
+                    <mat-card-actions>
+                    </mat-card-actions>
+            </mat-card>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+</div>
+<!--<p *ngFor="let content of fillerContent">{{content}}</p>-->
