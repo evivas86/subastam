@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request; 
-use App\Http\Controllers\Controller; 
-use App\User; 
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\User;
+use App\Role;
+use Illuminate\Support\Facades\Auth;
 use DB;
 use Validator;
 use Carbon\Carbon;
@@ -13,29 +14,35 @@ class ApiAuthController extends Controller
 {
     public $successStatus = 200;
 
-    public function getServerDate() {    
+    public function getServerDate() {
       return Carbon::now();
    }
-  
-    public function register(Request $request) {    
-    $validator = Validator::make($request->all(), [ 
+
+    public function register(Request $request) {
+    $validator = Validator::make($request->all(), [
                  'name' => 'required',
                  'email' => 'required|email',
-                 'password' => 'required',  
-                 'c_password' => 'required|same:password', 
-       ]);   
-    if ($validator->fails()) {          
-          return response()->json(['error'=>$validator->errors()], 401);                        
-         }    
-    $input = $request->all();  
+                 'password' => 'required',
+                 'c_password' => 'required|same:password',
+       ]);
+    if ($validator->fails()) {
+          return response()->json(['error'=>$validator->errors()], 401);
+         }
+
+    $input = $request->all();
     $input['password'] = bcrypt($input['password']);
-    $user = User::create($input); 
+    $input['points'] = bcrypt(0);
+    $user = User::create($input);
+    $role_user = Role::where('name','user')->first();
+    $user->roles()->attach($role_user);
+    //return $input;
+
     $success['token'] =  $user->createToken('AppName')->accessToken;
-    return response()->json(['success'=>$success], $this->successStatus); 
+    return response()->json(['success'=>$success], $this->successStatus);
    }
-     
-      
-   public function login(Request $request){ 
+
+
+   public function login(Request $request){
 
       $request->validate([
          'email' => 'required|string|email',
@@ -44,11 +51,12 @@ class ApiAuthController extends Controller
       ]);
 
       $credentials = request(['email','password']);
-      if(!Auth::attempt($credentials)){ 
+      if(!Auth::attempt($credentials)){
          return response()->json(['error'=>'Unauthorized'], 401);
       }
 
       $user = $request->user();
+      if($request->user()->hasRole('admin')){}
       $tokenResult = $user->createToken('Personal Access Token');
       $token = $tokenResult->token;
 
@@ -74,25 +82,25 @@ class ApiAuthController extends Controller
 
 
 
-   /*if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
-      $user = Auth::user(); 
-      $success['token'] =  $user->createToken('AppName')-> accessToken; 
-       return response()->json(['success' => $success], $this->successStatus); 
-     } else{ 
-      return response()->json(['error'=>'Unauthorized'], 401); 
+   /*if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+      $user = Auth::user();
+      $success['token'] =  $user->createToken('AppName')-> accessToken;
+       return response()->json(['success' => $success], $this->successStatus);
+     } else{
+      return response()->json(['error'=>'Unauthorized'], 401);
       } */
    }
-     
+
    public function getUser() {
     $user = Auth::user();
-    return response()->json(['success' => $user], $this->successStatus); 
+    return response()->json(['success' => $user], $this->successStatus);
     }
 
     public function logoutAll()
-    { 
+    {
       if (Auth::check()) {
          Auth::user()->AauthAcessToken()->delete();
-         return response()->json(['success'=>'logged out all sessions'], $this->successStatus); 
+         return response()->json(['success'=>'logged out all sessions'], $this->successStatus);
       }
    }
 
@@ -107,7 +115,7 @@ class ApiAuthController extends Controller
        ->update([
            'revoked' => true
        ]);
-       
+
        $accessToken->revoke();
        */
    //
@@ -125,3 +133,4 @@ class ApiAuthController extends Controller
       return response()->json(['success'=>'logged out'], $this->successStatus);
    }
 }
+

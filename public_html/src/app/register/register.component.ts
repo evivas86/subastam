@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
 
   sendRegister(){
 
-    this.strName = this.registerGroup.controls.email.value;
+    this.strName = this.registerGroup.controls.name.value;
     this.strEmail = this.registerGroup.controls.email.value;
     this.strPaswword = this.registerGroup.controls.password.value;
     this.strPaswwordC = this.registerGroup.controls.c_password.value;
@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
   let pass = registerGroup.controls.password.value;
   let confirmPass = registerGroup.controls.c_password.value;
 
-  return pass === confirmPass ? null : { notSame: true }     
+  return pass === confirmPass ? null : { notSame: true }
 }
 
 }
